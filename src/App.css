@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand */
+  --primary-color: #3B82F6;
+
+  /* Backgrounds */
+  --body-bg: #080F1C;
+  --container-bg: #0D1626;
+  --card-bg: #111B2B;
+  --card-image-bg: #172235;
+
+  /* Text */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+
+  /* Borders */
+  --card-border: #1E293B;
+  --container-border: #1E293B;
+
+  /* Header */
+  --header-bg: #0D1626;
+  --header-border: #1E293B;
+
+  /* Pagination */
+  --pagination-bg: #0D1626;
+  --pagination-item-bg: #111B2B;
+  --pagination-border: #1E293B;
+  --pagination-active-bg: #3B82F6;
+  --pagination-active-text: #FFFFFF;
+
+  /* Buttons */
+  --button-bg: #111B2B;
+  --button-border: #334155;
+  --button-text: #F8FAFC;
+
+  /* Dropdown */
+  --dropdown-bg: #111B2B;
+  --dropdown-border: #334155;
+  --dropdown-text: #F8FAFC;
+
+  /* Icons */
+  --icon-color: #94A3B8;
+  --icon-active: #3B82F6;
+
+  /* Misc */
+  --muted-color: #64748B;
+  --white: #FFFFFF;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-right-color: var(--primary-color);
+  animation: l2 1s infinite linear;
+}
+@keyframes l2 {to{transform: rotate(1turn)}}
+
+@media (max-width: 560px) {
+  * {
+    cursor: default;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+}

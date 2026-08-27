@@ -20,18 +20,16 @@ const App = () => {
   }, [limit, page]);
 
   return (
-    <div className="h-screen flex flex-col items-center max-w-screen bg-[var(--body-bg)] text-[var(--text-primary)]">
+    <div className="h-screen flex flex-col items-center max-w-screen bg-[var(--body-bg)] text-[var(--text-primary)] relative pb-[62px]">
       <Header />
-      <div className="cards-section bg-[var(--container-bg)] border-y border-[var(--pagination-border)] w-full my-4 py-[clamp(0.75rem,2vw,1.5rem)] flex-1 flex overflow-auto">
-        <div className="flex flex-1 gap-[clamp(0.75rem,2vw,1.5rem)] flex-wrap justify-center items-center max-w-[1600px] mx-auto ">
-          {data.map((item) => (
-            <Card key={item.id} item={item} />
-          ))}
-          {data.length == 0 && <div className="loader"></div>}
-        </div>
+      <div className="cards-section h-fit bg-[var(--container-bg)] border-y border-[var(--pagination-border)] w-full my-4 py-4 flex-1 flex justify-center items-center flex-wrap gap-4 overflow-auto">
+        {data.map((item) => (
+          <Card key={item.id} item={item} />
+        ))}
+        {data.length == 0 && <div className="loader"></div>}
       </div>
 
-      <div className="pagination text-[clamp(0.75rem,1.5vw,0.875rem)] flex justify-between gap-[clamp(0.5rem,2vw,1rem)] px-[clamp(1rem,4vw,2rem)] py-3 mt-auto w-full min-h-[60px] bg-[var(--pagination-bg)] border-t border-[var(--pagination-border)]">
+      <div className="pagination absolute bottom-0 text-[clamp(0.75rem,1.5vw,0.875rem)] flex justify-between px-[clamp(1rem,4vw,2rem)] py-3 mt-auto w-full min-h-[60px] bg-[var(--pagination-bg)] border-t border-[var(--pagination-border)]">
         <div className="flex items-center gap-2">
           Show
           <div className="border-[1.5px] border-[var(--pagination-border)] rounded flex items-center relative">
@@ -79,7 +77,7 @@ export default App;
 function Card({ item }) {
   return (
     <div className="card bg-[var(--card-bg)] border border-[var(--card-border)] w-[clamp(160px,30vw,250px)] h-fit rounded-[6px] overflow-hidden">
-      <div className="image bg-[var(--card-image-bg)] w-full h-[clamp(120px,20vw,170px)] overflow-hidden flex justify-center items-center object-cover">
+      <div className="image bg-[var(--card-image-bg)] w-full h-[clamp(120px,20vw,170px)] overflow-hidden flex justify-center items-center">
         <img
           src={item.download_url}
           alt="Image"
@@ -90,8 +88,9 @@ function Card({ item }) {
         <p className="flex items-center gap-1.5 text-[clamp(0.688rem,1.2vw,0.813rem)] font-semibold">
           ID: <span className="text-[var(--primary-color)]">{item.id}</span>
         </p>
-        <p className="flex items-center gap-1.5 text-[clamp(0.688rem,1.2vw,0.813rem)] text-[var(--text-secondary)]">
-          <i className="ph ph-user"></i> Author: {item.author}
+        <p className="flex items-center gap-1.5 text-[clamp(0.688rem,1.2vw,0.813rem)] text-[var(--text-secondary)] min-w-0">
+          <i className="ph ph-user shrink-0"></i>
+          <span className="truncate">Author: {item.author}</span>
         </p>
         <p className="flex items-center gap-1.5 text-[clamp(0.688rem,1.2vw,0.813rem)] text-[var(--text-secondary)]">
           <i className="ph ph-image"></i> Size: {item.width} x {item.height}

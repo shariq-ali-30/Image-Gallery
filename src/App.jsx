@@ -4,8 +4,8 @@ import "./App.css";
 
 const App = () => {
   let [data, setData] = useState([]);
-  let [limit, setLimit] = useState(15)
-  let [page, setPage] = useState(1)
+  let [limit, setLimit] = useState(15);
+  let [page, setPage] = useState(1);
 
   let getData = async () => {
     let response = await fetch(
@@ -17,12 +17,12 @@ const App = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [limit, page]);
 
   return (
     <div className="h-screen flex flex-col items-center max-w-screen bg-[var(--body-bg)] text-[var(--text-primary)]">
       <Header />
-      <div className="cards-section bg-[var(--container-bg)] border-y border-[var(--pagination-border)] w-full my-4 py-[clamp(0.75rem,2vw,1.5rem)] flex-1 flex overflow-auto scrollbar-none">
+      <div className="cards-section bg-[var(--container-bg)] border-y border-[var(--pagination-border)] w-full my-4 py-[clamp(0.75rem,2vw,1.5rem)] flex-1 flex overflow-auto">
         <div className="flex flex-1 gap-[clamp(0.75rem,2vw,1.5rem)] flex-wrap justify-center items-center max-w-[1600px] mx-auto ">
           {data.map((item) => (
             <Card key={item.id} item={item} />
@@ -31,11 +31,14 @@ const App = () => {
         </div>
       </div>
 
-      <div className="pagination text-[clamp(0.75rem,1.5vw,0.875rem)] flex justify-between items-center gap-[clamp(0.5rem,2vw,1rem)] flex-wrap px-[clamp(1rem,4vw,2rem)] py-3 mt-auto w-full min-h-[60px] bg-[var(--pagination-bg)] border-t border-[var(--pagination-border)]">
+      <div className="pagination text-[clamp(0.75rem,1.5vw,0.875rem)] flex justify-between gap-[clamp(0.5rem,2vw,1rem)] px-[clamp(1rem,4vw,2rem)] py-3 mt-auto w-full min-h-[60px] bg-[var(--pagination-bg)] border-t border-[var(--pagination-border)]">
         <div className="flex items-center gap-2">
           Show
-          <div className="border-[1.5px] border-[var(--pagination-border)] rounded flex items-center px-2 py-1 relative">
-            <select className="bg-[var(--pagination-bg)] outline-none appearance-none w-[40px]">
+          <div className="border-[1.5px] border-[var(--pagination-border)] rounded flex items-center relative">
+            <select
+              onChange={(e) => setLimit(e.target.value)}
+              className="bg-[var(--pagination-bg)] px-2 py-1 appearance-none w-[60px]"
+            >
               <option>15</option>
               <option>30</option>
               <option>50</option>
@@ -46,15 +49,23 @@ const App = () => {
           images per page
         </div>
         <div className="flex items-center gap-[clamp(0.5rem,2vw,1rem)]">
-          <button className="cursor-pointer border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px]">
-            <i className="ph-bold ph-caret-left text-[var(--primary-color)]"></i>
-            Previous
-          </button>
-          <p className="bg-[var(--primary-color)] h-[36px] w-[36px] flex justify-center items-center text-[clamp(0.875rem,1.5vw,1.125rem)] rounded">
-            1
+          {page > 1 && (
+            <button
+              onClick={() => setPage((prev) => prev - 1)}
+              className="cursor-pointer border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px]"
+            >
+              <i className="ph-bold ph-caret-left text-[var(--primary-color)]"></i>
+              <span>Previous</span>
+            </button>
+          )}
+          <p className="bg-[var(--primary-color)] h-[36px] w-[36px] flex justify-center items-center text-[clamp(0.875rem,1.5vw,1.125rem)] font-semibold rounded">
+            {page}
           </p>
-          <button className="cursor-pointer border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px]">
-            Next
+          <button
+            onClick={() => setPage((prev) => prev + 1)}
+            className={`cursor-pointer ${page >= 10 ? "invisible" : "visible"} border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px]`}
+          >
+            <span>Next</span>
             <i className="ph-bold ph-caret-right text-[var(--primary-color)]"></i>
           </button>
         </div>
@@ -65,11 +76,15 @@ const App = () => {
 
 export default App;
 
-function Card({item}) {
+function Card({ item }) {
   return (
     <div className="card bg-[var(--card-bg)] border border-[var(--card-border)] w-[clamp(160px,30vw,250px)] h-fit rounded-[6px] overflow-hidden">
       <div className="image bg-[var(--card-image-bg)] w-full h-[clamp(120px,20vw,170px)] overflow-hidden flex justify-center items-center object-cover">
-        <img src={item.download_url} alt="Image" className="w-full h-full object-cover" />
+        <img
+          src={item.download_url}
+          alt="Image"
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="p-[clamp(0.5rem,1.5vw,1rem)]">
         <p className="flex items-center gap-1.5 text-[clamp(0.688rem,1.2vw,0.813rem)] font-semibold">

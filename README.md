@@ -1,16 +1,55 @@
-# React + Vite
+# Image Gallery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About The Project
 
-Currently, two official plugins are available:
+This project is an Image Gallery built using React.js.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The purpose of this assignment was to practice React fundamentals, API integration, state management, side effects, dynamic rendering, and pagination by creating an interactive image gallery that fetches images from the Picsum Photos API and displays them in a responsive card-based layout.
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- JavaScript (ES6)
+- HTML5
+- CSS3
+- Vite
+- Picsum Photos API
+- Fetch API
+- Phosphor Icons
+- Tailwind CSS
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Fetch images dynamically from Picsum Photos API
+- Responsive image gallery layout
+- Image cards with image ID, author, and dimensions
+- Select number of images displayed per page
+- Options to display 15, 30, 50, or 100 images per page
+- Previous and Next pagination controls
+- Dynamic page number display
+- Loading indicator while images are being fetched
+- Responsive card sizing for different screen sizes
+- Clean and modern user interface
+- Responsive design for mobile, tablet, and desktop devices
+- Reusable Card component for displaying images
+- Optimized Header component using React.memo
+- Dynamic data rendering using React state
+
+## What I Learned
+
+Through this assignment, I learned:
+
+- How to fetch data from an external API using the Fetch API
+- How to use `useState` for managing application state
+- How to use `useEffect` for handling API requests and side effects
+- How to render API data dynamically using the `map()` method
+- How to implement pagination in a React application
+- How to update displayed data based on user selections
+- How to create reusable React components
+- How to use `React.memo` for component optimization
+- How to build responsive layouts using Tailwind CSS
+- How to handle loading states while fetching data
+
+## Author
+
+**Shariq Ali**

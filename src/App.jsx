@@ -6,6 +6,7 @@ const App = () => {
   let [data, setData] = useState([]);
   let [limit, setLimit] = useState(15);
   let [page, setPage] = useState(1);
+  let [loading, setLoading] = useState(true);
 
   let getData = async () => {
     let response = await fetch(
@@ -16,17 +17,19 @@ const App = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getData();
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   }, [limit, page]);
 
   return (
     <div className="h-screen flex flex-col items-center max-w-screen bg-[var(--body-bg)] text-[var(--text-primary)] relative pb-[62px]">
       <Header />
       <div className="cards-section h-fit bg-[var(--container-bg)] border-y border-[var(--pagination-border)] w-full my-4 py-4 flex-1 flex justify-center items-center flex-wrap gap-4 overflow-auto">
-        {data.map((item) => (
-          <Card key={item.id} item={item} />
-        ))}
-        {data.length == 0 && <div className="loader"></div>}
+        {!loading && data.map((item) => <Card key={item.id} item={item} />)}
+        {loading && <div className="loader"></div>}
       </div>
 
       <div className="pagination absolute bottom-0 text-[clamp(0.75rem,1.5vw,0.875rem)] flex justify-between px-[clamp(1rem,4vw,2rem)] py-3 mt-auto w-full min-h-[60px] bg-[var(--pagination-bg)] border-t border-[var(--pagination-border)]">
@@ -49,8 +52,9 @@ const App = () => {
         <div className="flex items-center gap-[clamp(0.5rem,2vw,1rem)]">
           {page > 1 && (
             <button
+              disabled={loading ? true : false}
               onClick={() => setPage((prev) => prev - 1)}
-              className="cursor-pointer border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px]"
+              className="cursor-pointer border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px] disabled:cursor-not-allowed"
             >
               <i className="ph-bold ph-caret-left text-[var(--primary-color)]"></i>
               <span>Previous</span>
@@ -60,8 +64,9 @@ const App = () => {
             {page}
           </p>
           <button
+            disabled={loading ? true : false}
             onClick={() => setPage((prev) => prev + 1)}
-            className={`cursor-pointer ${page >= 10 ? "invisible" : "visible"} border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px]`}
+            className={`cursor-pointer ${page >= 10 ? "invisible" : "visible"} border border-[var(--button-border)] px-[clamp(0.5rem,2vw,1rem)] h-[38px] flex justify-center items-center gap-2 rounded-[5px] disabled:cursor-not-allowed`}
           >
             <span>Next</span>
             <i className="ph-bold ph-caret-right text-[var(--primary-color)]"></i>

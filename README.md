@@ -14,7 +14,6 @@ The purpose of this assignment was to practice React fundamentals, API integrati
 - CSS3
 - Vite
 - Picsum Photos API
-- Fetch API
 - Phosphor Icons
 - Tailwind CSS
 

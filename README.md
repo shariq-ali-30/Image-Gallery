@@ -34,21 +34,6 @@ The purpose of this assignment was to practice React fundamentals, API integrati
 - Optimized Header component using React.memo
 - Dynamic data rendering using React state
 
-## What I Learned
-
-Through this assignment, I learned:
-
-- How to fetch data from an external API using the Fetch API
-- How to use `useState` for managing application state
-- How to use `useEffect` for handling API requests and side effects
-- How to render API data dynamically using the `map()` method
-- How to implement pagination in a React application
-- How to update displayed data based on user selections
-- How to create reusable React components
-- How to use `React.memo` for component optimization
-- How to build responsive layouts using Tailwind CSS
-- How to handle loading states while fetching data
-
 ## Author
 
 **Shariq Ali**
